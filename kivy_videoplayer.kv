@@ -1,0 +1,64 @@
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+
+<TestLabel@Label>:
+    font_size: 20
+    background_color: 1, 1, 1, 1
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:    # --- adds a border --- #
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
+
+
+<MainScreen>:
+    FloatLayout:
+        Image:
+            id: vid1
+            allow_stretch: True  # allow the video image to be scaled
+            size_hint: 1.0, 0.9
+            keep_ratio: True  # keep the aspect ratio so people don't look squashed
+            pos_hint: {'top':0.99}
+            canvas.before:
+                Color:
+                    rgba: .5, .5, .5, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+
+        Button:
+            text: 'Start'
+            id: start_button
+            pos_hint: {"x":0.0, "y":0.0}
+            size_hint: 0.3, 0.05
+            font_size: 20
+            on_release: app.start()
+
+        Button:
+            text: 'Stop'
+            id: stop_button
+            pos_hint: {"x":0.3, "y":0.0}
+            size_hint: 0.3, 0.05
+            font_size: 20
+            on_release: app.stop()
+
+        Button:
+            text: 'Save frame'
+            id: save_frame_button
+            pos_hint: {"x":0.6, "y":0.0}
+            size_hint: 0.4, 0.05
+            font_size: 20
+            on_release: app.save_frame()
